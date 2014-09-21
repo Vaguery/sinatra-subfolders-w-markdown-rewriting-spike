@@ -18,6 +18,10 @@ class Subtrees < Sinatra::Base
   # And inside the markdown images are referred to as if local, e.g. `![My pic](pic-1.png)`
 
 
+  # Set up kramdown rendering to reach into divs, curl quotes &c
+  set :markdown, :parse_block_html => true
+  set :markdown, :smartypants => true
+
   get '/' do
     all_slugs = Dir.glob(settings.public_folder + '/articles/*')
     markdown all_slugs.inject("# Hello World!\n\n") {|md,slug| md + 
